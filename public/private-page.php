@@ -17,10 +17,18 @@ $twig = new \Twig\Environment($loader, [
 // chargement de l'extension Twig_Extension_Debug
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    $url = 'login.php';
+    header("Location: {$url}", true, 302);
+    exit();
+}
 
 
 // affichage du rendu d'un template
 echo $twig->render('private-page.html.twig', [
     // transmission de données au template
     'greeting' => $greeting,
+    'login' => $_SESSION['login'],
+    
 ]);

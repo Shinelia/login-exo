@@ -32,7 +32,7 @@ if($_POST){
     $errors = [];
     $message = [];
 
-
+    
     // Remplacement des valeurs par défaut par celles de l'utilisateur
     if (isset($_POST['login'])) {
        $formData['login'] = $_POST['login'];}
@@ -63,18 +63,20 @@ if($_POST){
         $errors['auth'] = true;
     }
     
+    if($errors['auth']){
+        $message['auth'] = "Login ou mot de passe incorrect.";
+    }
+
     //Redirection vers private-page si authentifié
     if (!$errors) {
+        // s'il n'y a aucune erreur, on peut affecter des données à la variable de session
+        $_SESSION['login'] = $user['login'];
+        $_SESSION['user_id'] = $user['user_id'];
         $url = 'private-page.php';
         header("Location: {$url}", true, 302);
         exit();
     }
 } 
-
-if($errors['auth']){
-    $message['auth'] = "Login ou mot de passe incorrect.";
-}
-
 
 
 // initialisation d'une donnée
@@ -87,4 +89,5 @@ echo $twig->render('login.html.twig', [
     'message' => $message,
     'formData' => $formData,
     'errors' => $errors,
+
 ]);
