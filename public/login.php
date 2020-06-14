@@ -16,7 +16,6 @@ $twig = new \Twig\Environment($loader, [
 
 // chargement de l'extension Twig_Extension_Debug
 $twig->addExtension(new \Twig\Extension\DebugExtension());
-$formData = [ 'login' => '','password' => '',];
 
 // Appel à la "BDD"
 $user = require __DIR__.'/user-data.php';
@@ -33,9 +32,6 @@ if($_POST){
     $errors = [];
     $message = [];
 
-    dump($_POST);
-    dump($user['login']);
-
 
     // Remplacement des valeurs par défaut par celles de l'utilisateur
     if (isset($_POST['login'])) {
@@ -46,34 +42,37 @@ if($_POST){
 
 
     //Validation des données envoyées par l'utilisateur
-
+ 
     //Validation du login
     if (!isset($_POST['login']) || empty($_POST['login']) 
-    || strlen($_POST['login']<3) || strlen($_POST['login']>100) 
+    || strlen($_POST['login'])<3|| strlen($_POST['login'])>100 
     || ($_POST['login'] != $user['login'])){
        $errors['auth'] = true;
-       dump('login pas ok');
+    } 
 
-   } 
-
+    dump($user['password_hash']);
     //Validation du mot de passe
-   if (!isset($_POST['password']) || empty($_POST['password']) 
-    || strlen($_POST['password']<3) || strlen($_POST['password']>100)){
-        if (!password_verify($_POST['password'], $user['passwrd_hash'])) {
+   if (!isset($_POST['password']) || empty($_POST['password'])){
+        dump('ici tout va bien1');
+   }
+    elseif (strlen($_POST['password'])<3 || strlen($_POST['password'])>100) {
+        dump('ici tout va bien2');
+    }
+    elseif(!password_verify($_POST['password'], $user['password_hash'])) {
             $errors['auth'] = true;
-            dump('password pas ok');
-       }
-   } 
+            dump('mauvais mot de passe');
+    }
+    
+} 
 
+dump($errors['auth']);
    if($errors['auth']){
         $message['auth'] = "Login ou mot de passe incorrect.";
     }
 
-    if (!$errors) {
-        dump('ok');
-    }
-    
-}
+  
+
+
 
 
 
