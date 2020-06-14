@@ -50,30 +50,30 @@ if($_POST){
        $errors['auth'] = true;
     } 
 
-    dump($user['password_hash']);
     //Validation du mot de passe
    if (!isset($_POST['password']) || empty($_POST['password'])){
-        dump('ici tout va bien1');
+        $errors['auth'] = true;
+
    }
     elseif (strlen($_POST['password'])<3 || strlen($_POST['password'])>100) {
-        dump('ici tout va bien2');
+        $errors['auth'] = true;
+
     }
     elseif(!password_verify($_POST['password'], $user['password_hash'])) {
-            $errors['auth'] = true;
-            dump('mauvais mot de passe');
+        $errors['auth'] = true;
     }
     
+    //Redirection vers private-page si authentifié
+    if (!$errors) {
+        $url = 'private-page.php';
+        header("Location: {$url}", true, 302);
+        exit();
+    }
 } 
 
-dump($errors['auth']);
-   if($errors['auth']){
-        $message['auth'] = "Login ou mot de passe incorrect.";
-    }
-
-  
-
-
-
+if($errors['auth']){
+    $message['auth'] = "Login ou mot de passe incorrect.";
+}
 
 
 
