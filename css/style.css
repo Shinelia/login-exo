@@ -1,3 +1,4 @@
+/* page login */
 .container{
     width: 300px;
     border: 1px solid black;
@@ -12,4 +13,49 @@ button{
 
 .return{
     color: red;
+}
+
+/* page articles */
+
+.articles-list{
+    margin: auto;
+}
+
+.articles-list__title{
+    text-align: center;
+}
+
+table {
+    width: 500px;
+    text-align: center ;
+    border: 1px solid gray;
+    border-collapse: collapse;
+    margin: auto;
+}
+
+.articles-list__description{
+    font-variant: small-caps;
+    background-color: gainsboro;
+}
+
+.articles-list__article td{
+    border: 1px solid grey;
+}
+
+a.new-article{
+    display: block;
+    width: 220px;
+    margin: 20px auto;
+}
+
+/* page ajout d'article */
+.new-article-container{
+    width : 40%;
+    margin:20px auto;
+}
+
+.return-articles{
+    font-size: 12px;
+    color: red;
+    margin-left: 110px;
 }
