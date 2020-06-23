@@ -59,3 +59,16 @@ a.new-article{
     color: red;
     margin-left: 110px;
 }
+
+/* Page 404 */
+.not-found{
+    width: 300px;
+    margin: auto;
+    font-size: 20px;
+    text-align: center;
+}
+
+p{
+    margin: 50px auto;
+}
+
