@@ -11,6 +11,18 @@
         <div class="new-article-container">
             <form method="post">
                 <div class="form-group row">
+                    <label for="exampleFormControlInput1" class="col-sm-2 col-form-label">ID</label>
+                    <div class="col-sm-10">
+                       <input name="id" class="form-control" type="text" placeholder="{{formData.id}}" readonly>
+                    </div>
+                       {% if errors.name is defined %}
+                    <div class="return-articles">
+                            {{messages.name}}
+                    </div>
+                    {% endif %}   
+                </div>
+                
+                <div class="form-group row">
                     <label for="exampleFormControlInput1" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
                         <input name="name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="name" value="{{formData.name}}">

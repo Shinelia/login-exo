@@ -36,6 +36,7 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 }
 
 $formData = [
+    'id' => $_GET['id'],
     'name' => $_GET['name'],
     'description' => $_GET['description'],
     'price' => $_GET['price'],
