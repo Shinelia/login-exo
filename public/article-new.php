@@ -53,7 +53,8 @@ if($_POST){
 
     //Description : optionnel mais si non vide : pas de < > 
     if (isset($_POST['description'])){
-        if(strpos($_POST['description'], '<') || strpos($_POST['description'], '>')){
+        if(((strpos($_POST['description'], '<') || strpos($_POST['description'], '>')) == 0)
+        || (strpos($_POST['description'], '<') || strpos($_POST['description'], '>'))) {
             $errors['description'] = true;
             $messages['description'] = "La description ne peut pas contenir les caractères : < ou >.";
         }    
